@@ -9,12 +9,25 @@ const removeTask = removeButton => {
     addTaskTarget.removeChild(targetTask);
 };
 
+const completeTask = completeButton => {
+    const targetTask = completeButton.closest('li');
+    targetTask.classList.add('isComplete');
+    targetTask.removeChild(completeButton);
+};
+
 const addTask = task => {
     const listItem = document.createElement('li');
     const removeButton = document.createElement('button');
+    const completeButton = document.createElement('button');
+
     removeButton.innerText = '削除';
     removeButton.addEventListener('click', () => removeTask(removeButton));
+
+    completeButton.innerText = '完了';
+    completeButton.addEventListener('click', () => completeTask(completeButton));
+
     listItem.innerText = task;
+    listItem.append(completeButton);
     listItem.append(removeButton);
     addTaskTarget.appendChild(listItem);
 };
